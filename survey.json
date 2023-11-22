@@ -49,5 +49,22 @@
     }, {
         "question" : "Quelle nouvelle fonctionnalité devrait exister sur Bigscreen ?",
         "type" : "B"
+    }, {
+        "question" : "Aimeriez vous avoir des notifications plus précises au cours de vos sessions Bigscreen ?",
+        "type" : "A",
+        "choices" : ["Oui", "Non"]
+    }, {
+        "question" : "Aimeriez vous pouvoir inviter un ami à rejoindre votre session via son smartphone ?",
+        "type" : "A",
+        "choices" : ["Oui", "Non"]
+    }, {
+        "question" : "Aimeriez vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?",
+        "type" : "C"
+    }, {
+        "question" : "Aimeriez-vous jouer à des jeux exclusifs sur votre Bigscreen ?",
+        "type" : "C"
+    }, {
+        "question" : "Quelle nouvelle fonctionnalité devrait exister sur Bigscreen ?",
+        "type" : "B"
     }]
 }
