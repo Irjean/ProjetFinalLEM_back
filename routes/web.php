@@ -1,6 +1,8 @@
 <?php
 
+
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/question/get', [QuestionController::class, "getQuestions"]);
+Route::get('/', function () {
+    return view('welcome');
+});
