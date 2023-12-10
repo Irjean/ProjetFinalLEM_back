@@ -32,7 +32,8 @@ class AnswerSeeder extends Seeder
             foreach($questions as $question){
                 switch($question->type){
                     case "A":
-                        $content = Str::random(10);
+                        $arr = json_decode($question->choices);
+                        $content = $arr[rand(0, count($arr) - 1)];
                         break;
                     case "B": 
                         $content = Str::random(10);
