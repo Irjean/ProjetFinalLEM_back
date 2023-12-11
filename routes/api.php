@@ -25,4 +25,6 @@ Route::get('/questions', [QuestionController::class, "getQuestions"]);
 
 Route::post("/login", [UserController::class, "login"]);
 
-Route::get("/answers", [AnswerController::class, "getAnswers"]);
+Route::get("/", [AnswerController::class, "getAnswers"]);
+
+Route::post('/answer', [AnswerController::class, 'postAnswers']);
