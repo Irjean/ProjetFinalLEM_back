@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AnswerController extends Controller
 {
@@ -17,17 +18,28 @@ class AnswerController extends Controller
     public function postAnswers(Request $request)
     {
         try {
-            $submittedAnswers = $request->input('answers');
+            $submittedAnswers = $request->all();
+            $arr = $submittedAnswers["answers"];
 
-            foreach ($submittedAnswers as $submittedAnswer) {
+                $profile = new Profile();
+
+
+            foreach ($arr as $submittedAnswer) {
+                if($submittedAnswer["question_id"] == "1"){
+                    $profile->email = $submittedAnswer["answer"];
+                    $profile->uid = Str::random(10);
+
+                    $profile->save();
+                }
+
                 $answer = new Answer();
-                $answer->content = $submittedAnswer['content'];
-                $answer->question_id = $submittedAnswer['questionId'];
-                $answer->profile_id = $this->getprofileId($request);
+                $answer->content = $submittedAnswer['answer'];
+                $answer->question_id = $submittedAnswer['question_id'];
+                $answer->profile_id = $profile->id;
 
                 $answer->save();
             }
-            return response()->json(['message' => 'Réponses soumises avec succès']);
+            return response()->json(['message' => 'Réponses soumises avec succès', "profile" => $profile]);
         } catch (\Exception) {
             return response()->json(['error' => 'Erreur lors de la soumission des réponses'],500);
         }
