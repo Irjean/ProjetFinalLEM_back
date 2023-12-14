@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class AnswerController extends Controller
 {
-    public function getAnswers(){
+    public function getAllAnswers(){
         $answers = Answer::all();
         return response()->json($answers);
     }
