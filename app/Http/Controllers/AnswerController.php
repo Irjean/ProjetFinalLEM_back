@@ -15,6 +15,14 @@ class AnswerController extends Controller
         return response()->json($answers);
     }
 
+
+    public function getOneAnswer($id){
+        $profile = Profile::where("uid", $id)->first();
+        $answers = Answer::where("profile_id", $profile->id)->get();
+        
+        return response()->json($answers);
+    }
+
     public function postAnswers(Request $request)
     {
         try {
@@ -45,18 +53,6 @@ class AnswerController extends Controller
         }
 
     }
-    private function getProfileId(Request $request)
-    {
-        $user = $request->user();
 
-        if ($user) {
-            $profile = Profile::where('uid', $user->id)->first();
-
-            if ($profile) {
-                return $profile->id;
-            }
-        }
-
-        return null;
     }
 }
