@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/questions', [QuestionController::class, "getQuestions"]);
+
+Route::post("/login", [UserController::class, "login"]);
+
+Route::get("/answers/{id}", [AnswerController::class, "getOneAnswer"]);
+
+Route::get("/answer/all", [AnswerController::class, "getallAnswers"]);
+
+Route::post('/answer', [AnswerController::class, 'postAnswers']);
