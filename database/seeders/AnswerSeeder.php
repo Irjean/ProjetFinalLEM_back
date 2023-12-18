@@ -36,7 +36,7 @@ class AnswerSeeder extends Seeder
                         $content = $arr[rand(0, count($arr) - 1)];
                         break;
                     case "B": 
-                        $content = Str::random(10);
+                        $question->id == 1 ? $content = Str::random(10)."@gmail.com" : $content = Str::random(10);
                         break;
                     case "C":
                         $content = rand(1, 5);

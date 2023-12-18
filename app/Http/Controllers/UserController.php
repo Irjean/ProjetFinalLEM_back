@@ -20,7 +20,7 @@ class UserController extends Controller
             ], 200);
         } else {
             return response()->json([
-                "status" => "Credentials don't match."
+                "status" => "Les identifiants ne correspondent pas."
             ], 403);
         }
     }
