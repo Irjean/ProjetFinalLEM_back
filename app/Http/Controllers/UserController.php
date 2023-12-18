@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    //Allow a user to log in
     public function login(Request $request){
         $credentials = $request->validate([
             'email' => ['required'],
@@ -20,7 +21,7 @@ class UserController extends Controller
             ], 200);
         } else {
             return response()->json([
-                "status" => "Credentials don't match."
+                "status" => "Les identifiants ne correspondent pas."
             ], 403);
         }
     }

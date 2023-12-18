@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        //Create the admin account
         DB::table("users")->insert([
             "name" => "admin",
             "email" => "admin@bigscreen.com",
