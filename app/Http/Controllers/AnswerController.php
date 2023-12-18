@@ -35,13 +35,30 @@ class AnswerController extends Controller
 
 
             foreach ($arr as $submittedAnswer) {
+
+                //Check if the email is already used
                 if($submittedAnswer["question_id"] == "1"){
-                    $profile->email = $submittedAnswer["answer"];
-                    $profile->uid = Str::random(10);
+                    $email = $submittedAnswer["answer"];
+                    $testEmail = Profile::where("email", $email)->first();
+                    if($testEmail !== null){
+                        //If the email is used, return an error
+                        return response()->json(['message' => 'Cet email est déjà utilisé'],500);
+                    }
+                    $profile->email = $email;
+                    //Create an UID until it's not used
+                    $uid = Str::random(10);
+                    $testUid = Profile::where("uid", $uid)->first();
+                    while($testUid !== null){
+                        $uid = Str::random(10);
+                        $testUid = Profile::where("uid", $testUid)->first();
+                    }
+
+                    $profile->uid = $uid;
 
                     $profile->save();
                 }
 
+                //Once the profile is created, store the answers in the database with the newly created profile ID
                 $answer = new Answer();
                 $answer->content = $submittedAnswer['answer'];
                 $answer->question_id = $submittedAnswer['question_id'];
@@ -51,7 +68,7 @@ class AnswerController extends Controller
             }
             return response()->json(['message' => 'Réponses soumises avec succès', "profile" => $profile]);
         } catch (\Exception) {
-            return response()->json(['error' => 'Erreur lors de la soumission des réponses'],500);
+            return response()->json(['message' => 'Erreur lors de la soumission des réponses'],500);
         }
 
     }

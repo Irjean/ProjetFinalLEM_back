@@ -23,11 +23,24 @@ class AnswerSeeder extends Seeder
         while($count < 30){
             //get the existing questions
             $questions = Question::all();
-            //create a profile
+            //Generate a random email until it's not used
             $profile_email = Str::random(10).'@gmail.com';
+            $randProfile = Profile::where("email", $profile_email)->first();
+            while($randProfile !== null){
+                $profile_email = Str::random(10).'@gmail.com';
+                $randProfile = Profile::where("email", $profile_email)->first();
+            }
+            //Generate a random UID until it's not used
+            $randUid = Str::random(10);
+            $randUidProfile = Profile::where("uid", $randUid)->first();
+            while($randUidProfile !== null){
+                $randUid = Str::random(10);
+                $randUidProfile = Profile::where("uid", $randUid)->first();
+            }
+            //Create a profile with the unused email and UID
             $profile = new Profile([
                 "email"=>$profile_email,
-                "uid"=>Str::random(10)
+                "uid"=>$randUid
             ]);
 
             $profile->save();
