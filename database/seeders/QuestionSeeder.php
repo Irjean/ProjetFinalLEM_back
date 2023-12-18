@@ -13,9 +13,10 @@ class QuestionSeeder extends Seeder
      */
     public function run(): void
     {
+        //Get questions from a json file
         $surveyString = file_get_contents("./survey.json");
         $surveyJson = json_decode($surveyString, true);
-
+        //Create a survey
         DB::table("surveys")->insert([
             "id" => 1
         ]);
@@ -24,7 +25,7 @@ class QuestionSeeder extends Seeder
         $surveyArray = $surveyJson["questions"];
 
         
-
+        //Fill the question table with the questions from the json file
         foreach($surveyArray as $question){
             if(array_key_exists("choices", $question)){
                 DB::table("questions")->insert([

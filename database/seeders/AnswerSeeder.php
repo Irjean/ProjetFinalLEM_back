@@ -17,10 +17,13 @@ class AnswerSeeder extends Seeder
      */
     public function run(): void
     {
+
+        //Seed 30 profiles with answers
         $count = 0;
         while($count < 30){
+            //get the existing questions
             $questions = Question::all();
-
+            //create a profile
             $profile_email = Str::random(10).'@gmail.com';
             $profile = new Profile([
                 "email"=>$profile_email,
@@ -28,7 +31,7 @@ class AnswerSeeder extends Seeder
             ]);
 
             $profile->save();
-
+            //generate a random answer for each question and link it to the profile
             foreach($questions as $question){
                 switch($question->type){
                     case "A":

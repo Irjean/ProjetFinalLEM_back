@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class AnswerController extends Controller
-{
+{   
+    //Get all answers and send it to the client
     public function getAllAnswers(){
         $answers = Answer::all();
         return response()->json($answers);
     }
 
-
+    //Get one answer depending on the ID and send it to the client
     public function getOneAnswer($id){
         $profile = Profile::where("uid", $id)->first();
         $answers = Answer::where("profile_id", $profile->id)->get();
@@ -23,6 +24,7 @@ class AnswerController extends Controller
         return response()->json($answers);
     }
 
+    //Get answer from the client, create an uid for the profile and save it to the database
     public function postAnswers(Request $request)
     {
         try {
