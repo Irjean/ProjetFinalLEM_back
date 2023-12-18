@@ -14,6 +14,6 @@ Make sure to enter your database values in the .env file.
 
 After that run the following commands :
 
-`php artisan key:generate`
-`php artisan migrate`
+`php artisan key:generate`\
+`php artisan migrate`\
 `php artisan db:seed`
